@@ -97,16 +97,20 @@ class TodoTask extends StatelessWidget {
             children: [
               Container(
                 width: 40,
-                child: Icon(
-                    Icons.more_horiz
+                child: ImageIcon(
+                    AssetImage('assets/icons/todo.png'),
+                    size: 28,
+                    color: Colors.blue,
                 ),
               ),
               IconButton(
                   onPressed: todo.completed ? null :  () {
                     onDelete( todo.id );
                   },
-                  icon: Icon(
-                    Icons.delete_outline
+                  icon: ImageIcon(
+                    AssetImage('assets/icons/delete.png'),
+                    size: 28,
+                    color: todo.completed ? Colors.grey : Colors.black,
                   )
               )
             ],

@@ -20,8 +20,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   bool expanded = false;
-  bool filter = false;
-  bool pending = false;
+  String filterValue = 'all';
   List<TodoModel> todos = [
     TodoModel(id: 1, title: 'Design Landing Page', description: 'Create a modern and clean design for the new project', completed: true),
     TodoModel(id: 2, title: 'Team meeting at 11:00', description: 'Discuss project updates with the team', completed: true, priority: 'Low')
@@ -29,10 +28,15 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   List<TodoModel> getTodos() {
-    return todos;
+    switch ( filterValue ) {
+      case 'completed' :
+        return todos.where( ( todo ) => todo.completed == true).toList();
+      case 'pending' :
+        return todos.where( ( todo ) => todo.completed == false ).toList();
+      default:
+        return todos;
+    }
   }
-
-
 
   void toggleFAB() {
     setState(() {
@@ -67,16 +71,10 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void filterTodos( value ) {
-    print( value);
-    if( value == 'all') {
-      this.filter = false;
-    } else {
-      if( value == 'pending') {
-        this.pending = true;
-      } else {
-        this.pending = false;
-      }
-    }
+    this.setState(() {
+      this.filterValue = value;
+    });
+
 
   }
 
@@ -102,6 +100,22 @@ class _MainScreenState extends State<MainScreen> {
               // Progress Bar
               TodoProgressBarWidget(),
               SizedBox( height: 15,),
+
+              // Sample Image
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: 100,
+                  height: 200,
+                  color: Colors.red,
+                  child: Image.asset(
+                    'assets/images/background.png',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              SizedBox( height: 15,),
+
               // Category
               TodoCategoryWidget( onFilter: ( value ) {
                 filterTodos( value );

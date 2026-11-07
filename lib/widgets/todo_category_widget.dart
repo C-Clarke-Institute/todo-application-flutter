@@ -22,9 +22,9 @@ class TodoCategoryWidget extends StatelessWidget {
            TodoFilterWidget( title: 'Completed', onTap: () {
              onFilter('completed');
            },),
-           TodoFilterWidget( title: 'Work', onTap: () {
-             onFilter('work');
-           },),
+           // TodoFilterWidget( title: 'Work', onTap: () {
+           //   onFilter('work');
+           // },),
          ],
       ),
     );
