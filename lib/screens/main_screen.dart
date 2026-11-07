@@ -114,6 +114,42 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: double.infinity,
+                  height: 300,
+                  color: Colors.white,
+                  child: Image.network(
+                    'https://img.magnific.com/flat-lay-notebook-with-lis12t-desk_23-2148938726.jpg?semt=ais_hybrid&w=740&q=80',
+                    fit: BoxFit.fill,
+
+                    loadingBuilder: ( context , child , progress ) {
+                      if( progress == null ) {
+                        return child;
+                      }
+
+                      return SizedBox(
+                        width: double.infinity,
+                        height: 300,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                    
+                    errorBuilder: ( context , error , stackTrace ) {
+                      return SizedBox(
+                        width: double.infinity,
+                        height: 300,
+                        child: Center(
+                          child: Icon( Icons.broken_image ),
+                        ),
+                      );
+                    }
+                  ),
+                ),
+              ),
               SizedBox( height: 15,),
 
               // Category
